@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "734898186030",
+    "project_id": "pill-note-c26df",
+    "storage_bucket": "pill-note-c26df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734898186030:android:c494c3cfbdd24cc0cd3cbf",
+        "android_client_info": {
+          "package_name": "com.example.pill_note"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5e4qvZHPlK1WNtNJnwbVWvAboDEtFGX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
