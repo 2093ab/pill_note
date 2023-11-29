@@ -17,7 +17,7 @@ class FollowAdapter(val datas: MutableList<String>): RecyclerView.Adapter<Recycl
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as FollowViewHolder).binding
-        binding.followerImage.setImageResource(android.R.drawable.picture_frame)
+        binding.followerImage.setImageResource(R.drawable.profile_icon)
         binding.followerName.text = datas[position]
     }
 
