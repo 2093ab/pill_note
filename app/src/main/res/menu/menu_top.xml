@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_chatbot"
+        android:icon="@drawable/chatbot_menu_icon"
+        android:orderInCategory="1"
+        android:title="chatbot"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_notifications"
+        android:icon="@drawable/notification_icon"
+        android:orderInCategory="2"
+        android:title="notifications"
+        app:showAsAction="always" />
+
+</menu>
