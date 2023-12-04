@@ -37,7 +37,16 @@
                 app:layout_collapseMode="parallax"
                 app:tabMode="fixed"
                 app:tabTextColor="@color/dark_gray"
-                app:tabSelectedTextColor="@color/main"/>
+                app:tabSelectedTextColor="@color/main">
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="홈"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔로우"/>
+            </com.google.android.material.tabs.TabLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
