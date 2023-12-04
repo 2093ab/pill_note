@@ -12,7 +12,6 @@ class AuthActivity : AppCompatActivity() {
         val binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*
         binding.btnSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
@@ -22,7 +21,6 @@ class AuthActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
-        */
     }
 
 }
