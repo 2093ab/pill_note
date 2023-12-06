@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityAuthBinding.inflate(layoutInflater)

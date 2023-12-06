@@ -45,5 +45,6 @@ class SignInActivity : AppCompatActivity() {
                 }
             }
         // [END sign_in_with_email]
+
     }
 }
