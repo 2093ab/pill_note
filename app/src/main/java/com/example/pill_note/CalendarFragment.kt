@@ -38,7 +38,7 @@ class CalendarFragment : Fragment() {
     ): View? {
         val binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
-        val layoutManager = LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.calendarRecyclerview.layoutManager = layoutManager
         binding.calendarRecyclerview.adapter = MonthAdpater()
 

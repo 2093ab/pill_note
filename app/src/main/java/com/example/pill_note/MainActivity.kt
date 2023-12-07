@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val menu = listOf("통계", "팔로우")
         binding.viewpager.adapter = adapter
+        binding.viewpager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
             tab.text = menu[position]
         }.attach()
