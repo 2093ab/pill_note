@@ -11,4 +11,5 @@
     <string name="confirm_password">비밀번호 확인</string>
     <string name="nickname">닉네임</string>
     <string name="follower_list">나의 팔로잉</string>
+    <string name="medicine_name">약 이름</string>
 </resources>
