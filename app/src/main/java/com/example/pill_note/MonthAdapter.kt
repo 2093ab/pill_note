@@ -1,16 +1,18 @@
 package com.example.pill_note
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pill_note.databinding.FragmentCalendarBinding
 import com.example.pill_note.databinding.MonthRecyclerviewBinding
 import java.util.Calendar
 import java.util.Date
 
 class MonthViewHolder(val binding: MonthRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MonthAdpater: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MonthAdpater(var parentBinding: FragmentCalendarBinding): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var calendar: Calendar = Calendar.getInstance()
 
@@ -27,10 +29,10 @@ class MonthAdpater: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         //달 구하기
         calendar.time = Date() //현재 날짜 초기화
         calendar.set(Calendar.DAY_OF_MONTH,1) //스크롤시 현재 월의 1일로 이동
-        calendar.add(Calendar.MONTH , position) //스크롤시 포지션 만큼 달이동
+        calendar.add(Calendar.MONTH, position) //스크롤시 포지션 만큼 달이동
 
         // 현재 날짜 출력
-        binding.date.setText("${calendar.get(Calendar.MONTH) + 1}월")
+        parentBinding.date.setText("${calendar.get(Calendar.MONTH) + 1}월")
 
         val tempMonth = calendar.get(Calendar.MONTH)
 

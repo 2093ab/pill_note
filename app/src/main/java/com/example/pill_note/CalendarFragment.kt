@@ -40,7 +40,7 @@ class CalendarFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.calendarRecyclerview.layoutManager = layoutManager
-        binding.calendarRecyclerview.adapter = MonthAdpater()
+        binding.calendarRecyclerview.adapter = MonthAdpater(binding)
 
         var position: Int = Int.MAX_VALUE / 2
         binding.calendarRecyclerview.scrollToPosition(position)

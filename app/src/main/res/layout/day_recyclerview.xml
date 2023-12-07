@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/day_pill_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:src="@drawable/pill_icon_color" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
-        android:textSize="15dp"
+        android:textSize="12dp"
         android:textAlignment="center"/>
 
 </LinearLayout>
