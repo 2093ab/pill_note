@@ -12,11 +12,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
 
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
-        val fragment = FollowFragment()
+        val fragments: List<Fragment>
+        init {
+            fragments= listOf(CalendarFragment(), FollowFragment())
+        }
 
-        override fun getItemCount(): Int = 1
+        override fun getItemCount(): Int = fragments.size
 
-        override fun createFragment(position: Int): Fragment = fragment
+        override fun createFragment(position: Int): Fragment = fragments[position]
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +28,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val adapter = MyFragmentPagerAdapter(this)
-        /*
-        val menu = listOf("통계", "홈", "팔로우")
+
+        val menu = listOf("통계", "팔로우")
         binding.viewpager.adapter = adapter
         TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
             tab.text = menu[position]
-        }.attach()
-        */
-
-        val menu = "팔로우"
-        binding.viewpager.adapter = adapter
-        TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
-            tab.text = menu
         }.attach()
     }
 
