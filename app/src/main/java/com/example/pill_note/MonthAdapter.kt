@@ -50,7 +50,7 @@ class MonthAdpater: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
         binding.monthRecyclerview.layoutManager = GridLayoutManager(binding.monthRecyclerview.context, 7)
-        //binding.monthRecyclerview.adapter = DayAdapter(tempMonth, dayList)
+        binding.monthRecyclerview.adapter = DayAdapter(tempMonth, dayList)
     }
 
 }
