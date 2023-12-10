@@ -10,6 +10,7 @@ import com.example.pill_note.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -48,6 +49,9 @@ class SignUpActivity : AppCompatActivity() {
                     Log.d("pill_note", "createUserWithEmail:success")
                     val user = auth.currentUser
                     writeNewUser(user!!.uid, nickname, user.email.toString())
+                    user.updateProfile(userProfileChangeRequest {
+                        displayName = nickname
+                    })
                     Log.d("pill_note", "current user: ${user?.email}")
                     Toast.makeText(
                         baseContext, "Authentication success.",
