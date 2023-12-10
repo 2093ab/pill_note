@@ -1,5 +1,6 @@
 package com.example.pill_note
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,20 +23,30 @@ class SignUpActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding.signUpButton.setOnClickListener(){
             Log.d("pill_note", "sign up button clicked")
+            val nickname = binding.nicknameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            createAccount(email, password)
+            val passwordConfirm = binding.confirmPasswordEditText.text.toString()
+            if (passwordConfirm == password) createAccount(email, password, nickname)
+            else Toast.makeText(baseContext, "비밀번호가 일치하지 않습니다.",
+                Toast.LENGTH_SHORT).show()
         }
 
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String, nickname: String) {
         // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d("pill_note", "createUserWithEmail:success")
                     val user = auth.currentUser
+                    Log.d("pill_note", "current user: ${user?.email}")
+                    Toast.makeText(baseContext, "Authentication success.",
+                        Toast.LENGTH_SHORT).show()
+                    // go to main activity
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Log.w("pill_note", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
