@@ -25,15 +25,17 @@ class SignUpActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        binding.signUpButton.setOnClickListener(){
+        binding.signUpButton.setOnClickListener() {
             Log.d("pill_note", "sign up button clicked")
             val nickname = binding.nicknameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             val passwordConfirm = binding.confirmPasswordEditText.text.toString()
             if (passwordConfirm == password) createAccount(email, password, nickname)
-            else Toast.makeText(baseContext, "비밀번호가 일치하지 않습니다.",
-                Toast.LENGTH_SHORT).show()
+            else Toast.makeText(
+                baseContext, "비밀번호가 일치하지 않습니다.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     }
@@ -45,25 +47,27 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d("pill_note", "createUserWithEmail:success")
                     val user = auth.currentUser
-                    //val usersRef = db.getReference("users")
-                    //usersRef.setValue("hello ${user?.email} ${nickname}")
                     writeNewUser(user!!.uid, nickname, user.email.toString())
                     Log.d("pill_note", "current user: ${user?.email}")
-                    Toast.makeText(baseContext, "Authentication success.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication success.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     // go to main activity
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     Log.w("pill_note", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         // [END create_user_with_email]
     }
 
-    private fun writeNewUser (userId: String, name: String, email: String) {
+    private fun writeNewUser(userId: String, name: String, email: String) {
         val user = User(name, email)
         db.getReference("users").child(userId).setValue(user)
     }
