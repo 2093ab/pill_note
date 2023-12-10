@@ -10,10 +10,13 @@ import com.example.pill_note.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private val db = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -21,6 +24,7 @@ class SignUpActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
+
         binding.signUpButton.setOnClickListener(){
             Log.d("pill_note", "sign up button clicked")
             val nickname = binding.nicknameEditText.text.toString()
@@ -41,6 +45,9 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d("pill_note", "createUserWithEmail:success")
                     val user = auth.currentUser
+                    //val usersRef = db.getReference("users")
+                    //usersRef.setValue("hello ${user?.email} ${nickname}")
+                    writeNewUser(user!!.uid, nickname, user.email.toString())
                     Log.d("pill_note", "current user: ${user?.email}")
                     Toast.makeText(baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT).show()
@@ -54,5 +61,10 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         // [END create_user_with_email]
+    }
+
+    private fun writeNewUser (userId: String, name: String, email: String) {
+        val user = User(name, email)
+        db.getReference("users").child(userId).setValue(user)
     }
 }
