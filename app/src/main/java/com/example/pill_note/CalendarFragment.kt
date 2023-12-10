@@ -39,8 +39,9 @@ class CalendarFragment : Fragment() {
         val binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        layoutManager.setStackFromEnd(true)
         binding.calendarRecyclerview.layoutManager = layoutManager
-        binding.calendarRecyclerview.adapter = MonthAdpater(binding)
+        binding.calendarRecyclerview.adapter = MonthAdpater()
 
         var position: Int = Int.MAX_VALUE / 2
         binding.calendarRecyclerview.scrollToPosition(position)
