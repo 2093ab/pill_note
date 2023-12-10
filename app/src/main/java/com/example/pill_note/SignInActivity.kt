@@ -1,5 +1,6 @@
 package com.example.pill_note
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +19,7 @@ class SignInActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
-        binding.signInButton.setOnClickListener(){
+        binding.signInButton.setOnClickListener() {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             signIn(email, password)
@@ -34,6 +35,9 @@ class SignInActivity : AppCompatActivity() {
                     Log.d("pill_note", "signInWithEmail:success")
                     val user = auth.currentUser
                     Log.d("pill_note", "current user: ${user?.email}")
+                    // go to main activity
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("pill_note", "signInWithEmail:failure", task.exception)
