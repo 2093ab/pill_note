@@ -31,7 +31,7 @@ class MonthAdpater: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val tempMonth = calendar.get(Calendar.MONTH)
 
         // 현재 날짜 출력
-        //parentBinding.date.setText("${tempMonth + 1}월")
+        binding.date.setText("${tempMonth + 1}월")
 
         //6주 7일로 날짜를 표시
         var dayList: MutableList<Date> = MutableList(6 * 7 ) { Date() }
