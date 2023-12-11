@@ -10,7 +10,9 @@ import java.util.Date
 class DayViewHolder(val binding: DayRecyclerviewBinding, val tempMonth: Int): RecyclerView.ViewHolder(binding.root) {
     init {
         binding.dayRecyclerview.setOnClickListener() {
-            Log.d("DayViewHolder", "${tempMonth} + ${binding.dayText.text}")
+            if (binding.dayText.alpha != 0.4f) {
+                Log.d("DayViewHolder", "${tempMonth + 1} + ${binding.dayText.text}")
+            }
         }
     }
 }
