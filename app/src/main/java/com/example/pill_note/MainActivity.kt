@@ -12,9 +12,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
 
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
+
         val fragments: List<Fragment>
         init {
-            fragments= listOf(CalendarFragment(), FollowFragment())
+            fragments = listOf(HomeFragment(), CalendarFragment(), FollowFragment())
         }
 
         override fun getItemCount(): Int = fragments.size
@@ -29,12 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = MyFragmentPagerAdapter(this)
 
-        val menu = listOf("통계", "팔로우")
+        val menu = listOf("홈", "통계", "팔로우")
         binding.viewpager.adapter = adapter
-        binding.viewpager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
             tab.text = menu[position]
         }.attach()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
