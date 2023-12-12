@@ -9,11 +9,11 @@
     android:padding="15dp">
 
     <ImageView
-        android:id="@+id/medixine_category"
+        android:id="@+id/medicine_category"
         android:layout_width="60dp"
         android:layout_height="25dp"
         android:layout_marginLeft="20dp"
-        android:src="@android:color/holo_purple" />
+        android:src="@color/pink" />
 
     <TextView
         android:id="@+id/medicine_name"
@@ -29,5 +29,13 @@
         android:layout_marginLeft="160dp"
         />
     <!-- 이미지 버튼 이미지 넣어야 함 -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:contentDescription="@string/add"
+        android:layout_margin="16dp"/>
 
 </LinearLayout>

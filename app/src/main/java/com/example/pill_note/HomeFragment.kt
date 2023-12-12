@@ -46,8 +46,8 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.homeRecycler.layoutManager = layoutManager
 
-        // val adapter = HomeAdapter(medi_name)
-        // binding.homeRecycler.adapter = adapter
+        val adapter = HomeAdapter(medi_name)
+        binding.homeRecycler.adapter = adapter
 
         return binding.root
     }
