@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragments: List<Fragment>
         init {
-            fragments = listOf(HomeFragment(), FollowFragment())
+            fragments = listOf(HomeFragment(), CalendarFragment(), FollowFragment())
         }
 
         override fun getItemCount(): Int = fragments.size
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = MyFragmentPagerAdapter(this)
 
-        val menu = listOf("홈", "팔로우")
+        val menu = listOf("홈", "통계", "팔로우")
         binding.viewpager.adapter = adapter
         TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
             tab.text = menu[position]
