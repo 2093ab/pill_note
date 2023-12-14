@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.pill_note.databinding.FragmentCalendarBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +26,7 @@ class CalendarFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,9 @@ class CalendarFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        // Initialize Firebase Auth
+        auth = Firebase.auth
     }
 
     override fun onCreateView(
@@ -48,7 +55,9 @@ class CalendarFragment : Fragment() {
 
         val snap = PagerSnapHelper()
         snap.attachToRecyclerView(binding.calendarRecyclerview)
-
+        if (auth.currentUser != null) {
+            binding.calenderUserName.text = "${auth.currentUser!!.displayName}님의 필:기장"
+        }
         return binding.root
     }
 
