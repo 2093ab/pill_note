@@ -21,6 +21,7 @@
             android:src="@drawable/profile_icon" />
 
         <TextView
+            android:id="@+id/calender_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
