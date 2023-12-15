@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.pill_note"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -45,11 +45,13 @@ dependencies {
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     // Add the dependency for Firebase products that you want to use
-    implementation (platform("com.google.firebase:firebase-auth"))
-    implementation (platform("com.google.firebase:firebase-firestore"))
-    implementation (platform("com.google.firebase:firebase-storage"))
-    implementation (platform("com.google.firebase:firebase-database"))
-    implementation (platform("com.google.firebase:firebase-messaging"))
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    //implementation ("com.google.firebase:firebase-firestore")
+    //implementation ("com.google.firebase:firebase-storage")
+    implementation ("com.google.firebase:firebase-database-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-messaging-ktx")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

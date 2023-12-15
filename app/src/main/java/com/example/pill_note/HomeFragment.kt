@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     var datas: MutableList<String>? = null
     lateinit var adapter: MainActivity.MyFragmentPagerAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
