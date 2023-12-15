@@ -1,3 +1,4 @@
+
 package com.example.pill_note
 
 import android.content.Intent
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pill_note.databinding.FragmentHomeBinding
@@ -32,6 +35,10 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var auth: FirebaseAuth
+    var datas: MutableList<String>? = null
+    lateinit var adapter: MainActivity.MyFragmentPagerAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,6 +47,26 @@ class HomeFragment : Fragment() {
         }
 
         val binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()){
+            it.data!!.getStringExtra("result")?.let {
+                datas?.add(it)
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        binding.addBtn.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+            requestLauncher.launch(intent)
+        }
+
+        datas = savedInstanceState?.let {
+            it.getStringArrayList("datas")?.toMutableList()
+        } ?: let {
+            mutableListOf<String>()
+        }
+
         // Initialize Firebase Auth
         auth = Firebase.auth
     }
