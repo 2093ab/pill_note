@@ -72,7 +72,12 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun writeNewUser(userId: String, name: String, email: String) {
-        val user = User(name, email)
+        val user = User(userId, email, name)
         db.getReference("users").child(userId).setValue(user)
+    }
+
+    private fun writeFollowInfo (userId: String) {
+        val followInfo = FollowInfo(userId)
+        db.getReference("follow").child(userId).setValue(followInfo)
     }
 }
