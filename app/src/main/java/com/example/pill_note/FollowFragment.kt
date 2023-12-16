@@ -1,13 +1,20 @@
 package com.example.pill_note
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import com.example.pill_note.databinding.FragmentFollowBinding
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +30,7 @@ class FollowFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private val db = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,18 +43,49 @@ class FollowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding= FragmentFollowBinding.inflate(inflater, container, false)
-        val followers = mutableListOf<String>()
-        for(i in 1..10){
-            followers.add("팔로워 $i")
+        val binding = FragmentFollowBinding.inflate(inflater, container, false)
+        db.getReference("users").get().addOnSuccessListener {
+            val followings = mutableListOf<String>()
+            Log.d("pill_note", "followers: ${it.value}")
+            it.value?.let { it1 ->
+                for (it2 in it1 as HashMap<String, HashMap<String, Any>>) {
+                    Log.d("pill_note", "follower: ${it2.value["nickname"]}")
+                    followings.add(it2.value["nickname"].toString())
+                }
+            }
+            val adapter = FollowAdapter(followings)
+            binding.followerRecyclerView.adapter = adapter
+
+        }.addOnFailureListener {
+            Log.d("pill_note", "failed to get followers")
         }
 
         val layoutManager = LinearLayoutManager(activity)
         binding.followerRecyclerView.layoutManager = layoutManager
 
-        val adapter = FollowAdapter(followers)
-        binding.followerRecyclerView.adapter = adapter
+        binding.followerRecyclerView.addOnItemTouchListener(object: RecyclerView.OnItemTouchListener {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                val child = rv.findChildViewUnder(e.x, e.y)
+                if (child != null) {
+                    val position = rv.getChildAdapterPosition(child)
+                    Log.d("pill_note", "position: $position")
+                    /*val intent = Intent(activity, ProfileActivity::class.java)
+                    intent.putExtra("nickname", followers[position])
+                    startActivity(intent)*/
+                }
+                return false
+            }
 
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                Log.d("pill_note", "onTouchEvent")
+            }
+
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                Log.d("pill_note", "onRequestDisallowInterceptTouchEvent")
+            }
+
+
+        })
         return binding.root
     }
 
