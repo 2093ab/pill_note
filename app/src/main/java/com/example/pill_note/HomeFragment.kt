@@ -16,6 +16,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -38,7 +42,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     var datas: MutableList<String>? = null
     lateinit var adapter: MainActivity.MyFragmentPagerAdapter
     lateinit var requestLauncher: ActivityResultLauncher<Intent>
-
+    private val db = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,10 +77,51 @@ class HomeFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val medi_name = mutableListOf<String>()
-        for (i in 1..10) {
-            medi_name.add("약 이름 $i")
-        }
+        db.getReference("pill").addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.value?.let { it: Any ->
+                    Log.d("pill_note", "pill info: $it")
+                    val medi_name = mutableListOf<String>()
+                    for (it2 in it as HashMap<String, Any>) {
+                        Log.d("pill_note", "pill name: ${it2.key}")
+                        medi_name.add(it2.key)
+                    }
+
+                    val adapter = HomeAdapter(medi_name)
+                    binding.homeRecycler.adapter = adapter
+                }
+                /*
+                val pillInfo = snapshot.getValue<PillInfo>()
+                if (pillInfo == null) {
+                    Log.d("pill_note", "pill info is null")
+                    return
+                }
+                Log.d("pill_note", "pill info: ${pillInfo.pill}")
+                for (pill in pillInfo.pill) {
+                    Log.d("pill_note", "pill name: ${pill.name}")
+                    medi_name.add(pill.name)
+                }*/
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("pill_note", "pill info cancelled")
+            }
+        })
+                /*
+        db.getReference("pill").get().addOnSuccessListener {
+            val pillInfo = it.getValue(PillInfo::class.java)
+            if (pillInfo == null) {
+                Log.d("pill_note", "pill info is null")
+                return@addOnSuccessListener
+            }
+            Log.d("pill_note", "pill info: ${pillInfo.pill}")
+            for (pill in pillInfo.pill) {
+                Log.d("pill_note", "pill name: ${pill.name}")
+                medi_name.add(pill.name)
+            }
+        }.addOnFailureListener {
+            Log.d("pill_note", "failed to get pill db")
+        }*/
 
         if (auth.currentUser != null) {
             Log.d("pill_note", "current user: ${auth.currentUser!!.displayName}")
@@ -93,26 +138,26 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val layoutManager = LinearLayoutManager(activity)
         binding.homeRecycler.layoutManager = layoutManager
 
-        val adapter = HomeAdapter(medi_name)
+        val adapter = HomeAdapter(mutableListOf<String>())
         binding.homeRecycler.adapter = adapter
 
-        binding.addBtn.setOnClickListener(this)
-        binding.homeMorningBtn.setOnClickListener(this)
+        //binding.addBtn.setOnClickListener(this)
+        //binding.homeMorningBtn.setOnClickListener(this)
         return binding.root
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.home_morning_btn -> {
+            /*R.id.home_morning_btn -> {
                 Log.d("pill_note", "morning button clicked")
-            }
+            }*/
 
-            R.id.add_btn -> {
+            /*R.id.add_btn -> {
                 Log.d("pill_note", "add button clicked")
 
                 val intent = Intent(activity, PillAddFragment::class.java)
                 requestLauncher.launch(intent)
-            }
+            }*/
         }
     }
 
