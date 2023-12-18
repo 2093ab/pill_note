@@ -16,7 +16,11 @@ import com.google.firebase.ktx.Firebase
 class FollowViewHolder(val binding: FollowerRecyclerviewBinding) :
     RecyclerView.ViewHolder(binding.root)
 
-class FollowAdapter(val datas: MutableList<User>, val currentUserId: String) :
+class FollowAdapter(
+    private val datas: MutableList<User>,
+    private val isFollow: MutableList<Boolean>,
+    private val currentUserId: String
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val db = Firebase.database
@@ -35,6 +39,8 @@ class FollowAdapter(val datas: MutableList<User>, val currentUserId: String) :
         val binding = (holder as FollowViewHolder).binding
         binding.followerImage.setImageResource(R.drawable.profile_icon)
         binding.followerName.text = datas[position].nickname
+        if (isFollow[position]) binding.followerInfoButton.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+        else binding.followerInfoButton.setImageResource(R.drawable.arrow)
         binding.followerInfoButton.setOnClickListener {
             Log.d("pill_note", "follower info button clicked")
             updateFollowInfo(datas[position].id!!, currentUserId)
