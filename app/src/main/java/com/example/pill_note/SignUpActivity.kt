@@ -51,15 +51,18 @@ class SignUpActivity : AppCompatActivity() {
                     writeNewUser(user!!.uid, nickname, user.email.toString())
                     user.updateProfile(userProfileChangeRequest {
                         displayName = nickname
-                    })
+                    }).addOnSuccessListener {
+                        Log.d("pill_note", "User profile updated.")
+
+                        // go to main activity
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
                     Log.d("pill_note", "current user: ${user?.email}")
                     Toast.makeText(
                         baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    // go to main activity
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
                 } else {
                     Log.w("pill_note", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
@@ -72,7 +75,13 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun writeNewUser(userId: String, name: String, email: String) {
-        val user = User(name, email)
+        val user = User(userId, email, name)
         db.getReference("users").child(userId).setValue(user)
+        writeFollowInfo(userId, user)
+    }
+
+    private fun writeFollowInfo (userId: String, currentUser: User) {
+        val followInfo = FollowInfo(userId, currentUser)
+        db.getReference("follow").child(userId).setValue(followInfo)
     }
 }
