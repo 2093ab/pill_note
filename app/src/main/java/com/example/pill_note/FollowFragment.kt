@@ -61,6 +61,7 @@ class FollowFragment : Fragment() {
             it.value?.let { it1 ->
                 for (it2 in it1 as HashMap<String, HashMap<String, Any>>) {
                     Log.d("pill_note", "follower: ${it2.value["nickname"]}")
+                    if (it2.value["id"].toString() == auth.currentUser!!.uid) continue
                     followings.add(
                         User(
                             it2.value["id"].toString(),
