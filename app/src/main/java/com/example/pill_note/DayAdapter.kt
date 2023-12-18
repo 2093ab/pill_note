@@ -1,17 +1,34 @@
 package com.example.pill_note
 
-import android.util.Log
+import android.app.AlertDialog
+import android.app.AlertDialog.Builder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pill_note.databinding.DayRecyclerviewBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.Date
+
+private val db = Firebase.database
 
 class DayViewHolder(val binding: DayRecyclerviewBinding, val tempMonth: Int): RecyclerView.ViewHolder(binding.root) {
     init {
         binding.dayRecyclerview.setOnClickListener() {
             if (binding.dayText.alpha != 0.4f) {
-                Log.d("DayViewHolder", "${tempMonth + 1} + ${binding.dayText.text}")
+                val builder: AlertDialog.Builder = Builder(this.binding.root.context)
+
+                builder.setTitle("${tempMonth+1}월 ${binding.dayText.text}일")
+
+
+
+                builder.setMessage("복약 여부 확인")
+
+                val alertDialog: AlertDialog = builder.create()
+
+                alertDialog.show()
             }
         }
     }
@@ -25,7 +42,7 @@ class DayAdapter(val tempMonth: Int, val dayList: MutableList<Date>): RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             RecyclerView.ViewHolder
-            = DayViewHolder(DayRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false), tempMonth)
+            = DayViewHolder(DayRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false), tempMonth, currentUser)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as DayViewHolder).binding
