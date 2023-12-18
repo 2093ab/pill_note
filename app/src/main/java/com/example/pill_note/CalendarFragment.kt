@@ -1,16 +1,19 @@
 package com.example.pill_note
 
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.pill_note.databinding.FragmentCalendarBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +60,15 @@ class CalendarFragment : Fragment() {
         snap.attachToRecyclerView(binding.calendarRecyclerview)
         if (auth.currentUser != null) {
             binding.calenderUserName.text = "${auth.currentUser!!.displayName}님의 필:기장"
+        }
+
+        binding.btnComplete.setOnClickListener {
+            val myToast: Toast = Toast.makeText(
+                this.context,
+                "저장되었습니다.",
+                Toast.LENGTH_SHORT
+            )
+            myToast.show()
         }
         return binding.root
     }

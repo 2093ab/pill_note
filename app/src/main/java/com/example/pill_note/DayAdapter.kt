@@ -18,17 +18,19 @@ class DayViewHolder(val binding: DayRecyclerviewBinding, val tempMonth: Int): Re
     init {
         binding.dayRecyclerview.setOnClickListener() {
             if (binding.dayText.alpha != 0.4f) {
-                val builder: AlertDialog.Builder = Builder(this.binding.root.context)
+                //val builder: AlertDialog.Builder = Builder(this.binding.root.context)
 
-                builder.setTitle("${tempMonth+1}월 ${binding.dayText.text}일")
+                //builder.setTitle("${tempMonth+1}월 ${binding.dayText.text}일")
 
+                var i = 0
 
-
-                builder.setMessage("복약 여부 확인")
-
-                val alertDialog: AlertDialog = builder.create()
-
-                alertDialog.show()
+                if (i == 0) {
+                    binding.dayPillIcon.setImageResource(R.drawable.pill_icon_color)
+                    i = 1
+                } else {
+                    binding.dayPillIcon.setImageResource(R.drawable.pill_icon_white)
+                    i = 0
+                }
             }
         }
     }
@@ -42,7 +44,7 @@ class DayAdapter(val tempMonth: Int, val dayList: MutableList<Date>): RecyclerVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             RecyclerView.ViewHolder
-            = DayViewHolder(DayRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false), tempMonth, currentUser)
+            = DayViewHolder(DayRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false), tempMonth)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as DayViewHolder).binding
