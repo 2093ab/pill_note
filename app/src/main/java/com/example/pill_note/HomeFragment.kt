@@ -109,9 +109,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
             R.id.add_btn -> {
                 Log.d("pill_note", "add button clicked")
-                /*
-                val intent = Intent(activity, AddActivity::class.java)
-                requestLauncher.launch(intent)*/
+
+                val intent = Intent(activity, PillAddFragment::class.java)
+                requestLauncher.launch(intent)
             }
         }
     }
