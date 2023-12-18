@@ -1,4 +1,3 @@
-
 package com.example.pill_note
 
 import android.content.Intent
@@ -13,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pill_note.databinding.FragmentHomeBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
@@ -30,13 +30,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var auth: FirebaseAuth
     var datas: MutableList<String>? = null
     lateinit var adapter: MainActivity.MyFragmentPagerAdapter
+    lateinit var requestLauncher: ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,19 +47,14 @@ class HomeFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        val binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()){
+        requestLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
             it.data!!.getStringExtra("result")?.let {
                 datas?.add(it)
                 adapter.notifyDataSetChanged()
             }
-        }
-
-        binding.addBtn.setOnClickListener {
-            val intent = Intent(this, AddActivity::class.java)
-            requestLauncher.launch(intent)
         }
 
         datas = savedInstanceState?.let {
@@ -90,16 +86,34 @@ class HomeFragment : Fragment() {
                 DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
             )
 
-            binding.homeMessage.text = "${auth.currentUser!!.displayName}님, \n${strNow} \n복약을 진행해주세요!"
+            binding.homeMessage.text =
+                "${auth.currentUser!!.displayName}님, \n${strNow} \n복약을 진행해주세요!"
         }
 
         val layoutManager = LinearLayoutManager(activity)
         binding.homeRecycler.layoutManager = layoutManager
 
-        // val adapter = HomeAdapter(medi_name)
-        // binding.homeRecycler.adapter = adapter
+        val adapter = HomeAdapter(medi_name)
+        binding.homeRecycler.adapter = adapter
 
+        binding.addBtn.setOnClickListener(this)
+        binding.homeMorningBtn.setOnClickListener(this)
         return binding.root
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.home_morning_btn -> {
+                Log.d("pill_note", "morning button clicked")
+            }
+
+            R.id.add_btn -> {
+                Log.d("pill_note", "add button clicked")
+                /*
+                val intent = Intent(activity, AddActivity::class.java)
+                requestLauncher.launch(intent)*/
+            }
+        }
     }
 
     companion object {
