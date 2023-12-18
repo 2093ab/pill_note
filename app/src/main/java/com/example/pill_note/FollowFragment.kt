@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import com.example.pill_note.databinding.FragmentFollowBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -31,11 +33,19 @@ class FollowFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private val db = Firebase.database
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+        if (auth.currentUser == null) {
+            val intent = Intent(activity, AuthActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -45,15 +55,24 @@ class FollowFragment : Fragment() {
     ): View? {
         val binding = FragmentFollowBinding.inflate(inflater, container, false)
         db.getReference("users").get().addOnSuccessListener {
-            val followings = mutableListOf<String>()
+            val followings = mutableListOf<User>()
+
             Log.d("pill_note", "followers: ${it.value}")
             it.value?.let { it1 ->
                 for (it2 in it1 as HashMap<String, HashMap<String, Any>>) {
                     Log.d("pill_note", "follower: ${it2.value["nickname"]}")
-                    followings.add(it2.value["nickname"].toString())
+                    followings.add(
+                        User(
+                            it2.value["id"].toString(),
+                            it2.value["email"].toString(),
+                            it2.value["nickname"].toString()
+                        )
+                    )
+
                 }
+
             }
-            val adapter = FollowAdapter(followings)
+            val adapter = FollowAdapter(followings, auth.currentUser!!.uid)
             binding.followerRecyclerView.adapter = adapter
 
         }.addOnFailureListener {
@@ -63,7 +82,8 @@ class FollowFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.followerRecyclerView.layoutManager = layoutManager
 
-        binding.followerRecyclerView.addOnItemTouchListener(object: RecyclerView.OnItemTouchListener {
+        binding.followerRecyclerView.addOnItemTouchListener(object :
+            RecyclerView.OnItemTouchListener {
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 val child = rv.findChildViewUnder(e.x, e.y)
                 if (child != null) {
