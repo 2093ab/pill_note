@@ -56,19 +56,18 @@ class PillAddFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         binding = FragmentPillAddBinding.inflate(inflater, container, false)
         binding.mediAdd.setOnClickListener(this)
-        /*
         binding.plusButton.setOnClickListener {
             Log.d("pill_note", "plus button clicked")
-            binding.mediDose.text = "${binding.mediDose.text.toString().toInt() + 1}"
+            binding.mediDose.setText((binding.mediDose.text.toString().toInt() + 1).toString())
         }
         binding.minusButton.setOnClickListener {
             Log.d("pill_note", "minus button clicked")
             if (binding.mediDose.text.toString().toInt() > 0) {
-                binding.mediDose.text = (binding.mediDose.text.toString().toInt() - 1).toString()
+                binding.mediDose.setText((binding.mediDose.text.toString().toInt() - 1).toString())
             }
-        }*/
+        }
+        binding.mediDose.setText("0")
         return binding.root
-        //return inflater.inflate(R.layout.fragment_pill_add, container, false)
     }
 
     override fun onClick(v: View?) {

@@ -112,21 +112,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 Log.d("pill_note", "pill info cancelled")
             }
         })
-                /*
-        db.getReference("pill").get().addOnSuccessListener {
-            val pillInfo = it.getValue(PillInfo::class.java)
-            if (pillInfo == null) {
-                Log.d("pill_note", "pill info is null")
-                return@addOnSuccessListener
-            }
-            Log.d("pill_note", "pill info: ${pillInfo.pill}")
-            for (pill in pillInfo.pill) {
-                Log.d("pill_note", "pill name: ${pill.name}")
-                medi_name.add(pill.name)
-            }
-        }.addOnFailureListener {
-            Log.d("pill_note", "failed to get pill db")
-        }*/
 
         if (auth.currentUser != null) {
             Log.d("pill_note", "current user: ${auth.currentUser!!.displayName}")
