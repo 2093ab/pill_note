@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="약 추가하기"
-        android:textStyle="bold"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="약 이름"/>
+        android:text="약 이름" />
 
     <EditText
         android:id="@+id/medi_name"
@@ -30,22 +30,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="복용량"/>
+        android:text="복용량" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/minus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#00000000"
             android:text="-"
-            android:textSize="20dp"
             android:textColor="#787878"
-            android:backgroundTint="#00000000" />
+            android:textSize="20dp" />
         <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,234 +58,259 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:inputType="number"
-            />
+            android:inputType="number" />
+
         <Button
             android:id="@+id/plus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#00000000"
             android:text="+"
-            android:textSize="20dp"
             android:textColor="#787878"
-            android:backgroundTint="#00000000" />
+            android:textSize="20dp" />
 
     </LinearLayout>
 
-    <!--TextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="복용시간"/>
+        android:text="복용시간" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/button_am"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="오전" />
+
+        <!--Button
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="아침" />
+            android:text="점심" /-->
 
         <Button
-            android:layout_width="120dp"
+            android:id="@+id/button_pm"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="점심" />
+            android:text="오후" />
 
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="저녁" />
-
-    </LinearLayout-->
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="시"/>
+            android:text="시" />
 
         <GridLayout
             android:id="@+id/hour_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:columnCount="6"
+            android:orientation="horizontal"
             android:paddingLeft="50dp">
 
             <Button
+                android:id="@+id/hour1"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="1"
-                />
+                android:text="1" />
+
             <Button
+                android:id="@+id/hour2"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="2"
-                />
+                android:text="2" />
+
             <Button
+                android:id="@+id/hour3"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="3"
-                />
+                android:text="3" />
+
             <Button
+                android:id="@+id/hour4"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="4"
-                />
+                android:text="4" />
+
             <Button
+                android:id="@+id/hour5"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="5"
-                />
+                android:text="5" />
+
             <Button
+                android:id="@+id/hour6"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="6"
-                />
+                android:text="6" />
+
             <Button
+                android:id="@+id/hour7"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="7"
-                />
+                android:text="7" />
+
             <Button
+                android:id="@+id/hour8"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="8"
-                />
+                android:text="8" />
+
             <Button
+                android:id="@+id/hour9"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="9"
-                />
+                android:text="9" />
+
             <Button
+                android:id="@+id/hour10"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="10"
-                />
+                android:text="10" />
+
             <Button
+                android:id="@+id/hour11"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="11"
-                />
+                android:text="11" />
+
             <Button
+                android:id="@+id/hour12"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="12"
-                />
+                android:text="12" />
         </GridLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="분"/>
+            android:text="분" />
 
         <GridLayout
             android:id="@+id/minute_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:columnCount="6"
+            android:orientation="horizontal"
             android:paddingLeft="50dp">
 
             <Button
+                android:id="@+id/minute0"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="00"
-                />
+                android:text="00" />
+
             <Button
+                android:id="@+id/minute5"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="05"
-                />
+                android:text="05" />
+
             <Button
+                android:id="@+id/minute10"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="10"
-                />
+                android:text="10" />
+
             <Button
+                android:id="@+id/minute15"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="15"
-                />
+                android:text="15" />
+
             <Button
+                android:id="@+id/minute20"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="20"
-                />
+                android:text="20" />
+
             <Button
+                android:id="@+id/minute25"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="25"
-                />
+                android:text="25" />
+
             <Button
+                android:id="@+id/minute30"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="30"
-                />
+                android:text="30" />
+
             <Button
+                android:id="@+id/minute35"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="35"
-                />
+                android:text="35" />
+
             <Button
+                android:id="@+id/minute40"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="40"
-                />
+                android:text="40" />
+
             <Button
+                android:id="@+id/minute45"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="45"
-                />
+                android:text="45" />
+
             <Button
+                android:id="@+id/minute50"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="50"
-                />
+                android:text="50" />
+
             <Button
+                android:id="@+id/minute55"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_gray"
-                android:text="55"
-                />
+                android:text="55" />
 
         </GridLayout>
 
@@ -296,7 +321,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="추가하기"
-        />
+        android:backgroundTint="@color/main"
+        android:text="추가하기" />
 
 </LinearLayout>
