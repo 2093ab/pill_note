@@ -69,6 +69,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
+
+        if (auth.currentUser == null) {
+            val intent = Intent (activity, AuthActivity::class.java)
+            startActivity (intent)
+        }
     }
 
     override fun onCreateView(
@@ -77,13 +82,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        db.getReference("pill").addValueEventListener(object: ValueEventListener {
+        db.getReference("pill").child(auth.currentUser!!.uid).addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.value?.let { it: Any ->
                     Log.d("pill_note", "pill info: $it")
                     val medi_name = mutableListOf<String>()
-                    for (it2 in it as HashMap<String, Any>) {
-                        Log.d("pill_note", "pill name: ${it2.key}")
+                    for (it2 in it as HashMap<String, HashMap<String, String>>) {
+                        Log.d("pill_note", "pill name: ${it2.value["pillname"]}")
                         medi_name.add(it2.key)
                     }
 

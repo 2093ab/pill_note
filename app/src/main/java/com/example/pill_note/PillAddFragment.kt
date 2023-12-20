@@ -44,8 +44,8 @@ class PillAddFragment : Fragment(), View.OnClickListener {
 
         auth = Firebase.auth
         if (auth.currentUser == null) {
-            val intent = Intent (activity, AuthActivity::class.java)
-            startActivity (intent)
+            val intent = Intent(activity, AuthActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -78,7 +78,8 @@ class PillAddFragment : Fragment(), View.OnClickListener {
                 val mediName = binding.mediName.text.toString()
                 val mediDose = binding.mediDose.text.toString()
 
-                db.getReference("pill").child(auth.currentUser!!.uid).setValue(Pill(mediName, mediDose))
+                db.getReference("pill").child(auth.currentUser!!.uid).child(mediName)
+                    .setValue(Pill(mediName, mediDose))
             }
         }
     }
