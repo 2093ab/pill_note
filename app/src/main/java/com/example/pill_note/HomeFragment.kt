@@ -69,6 +69,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
+
+        if (auth.currentUser == null) {
+            val intent = Intent (activity, AuthActivity::class.java)
+            startActivity (intent)
+        }
     }
 
     override fun onCreateView(
@@ -77,13 +82,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        db.getReference("pill").addValueEventListener(object: ValueEventListener {
+        db.getReference("pill").child(auth.currentUser!!.uid).addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.value?.let { it: Any ->
                     Log.d("pill_note", "pill info: $it")
                     val medi_name = mutableListOf<String>()
-                    for (it2 in it as HashMap<String, Any>) {
-                        Log.d("pill_note", "pill name: ${it2.key}")
+                    for (it2 in it as HashMap<String, HashMap<String, String>>) {
+                        Log.d("pill_note", "pill name: ${it2.value["pillname"]}")
                         medi_name.add(it2.key)
                     }
 
@@ -107,21 +112,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 Log.d("pill_note", "pill info cancelled")
             }
         })
-                /*
-        db.getReference("pill").get().addOnSuccessListener {
-            val pillInfo = it.getValue(PillInfo::class.java)
-            if (pillInfo == null) {
-                Log.d("pill_note", "pill info is null")
-                return@addOnSuccessListener
-            }
-            Log.d("pill_note", "pill info: ${pillInfo.pill}")
-            for (pill in pillInfo.pill) {
-                Log.d("pill_note", "pill name: ${pill.name}")
-                medi_name.add(pill.name)
-            }
-        }.addOnFailureListener {
-            Log.d("pill_note", "failed to get pill db")
-        }*/
 
         if (auth.currentUser != null) {
             Log.d("pill_note", "current user: ${auth.currentUser!!.displayName}")
