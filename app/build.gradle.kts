@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -51,6 +52,10 @@ dependencies {
     implementation ("com.google.firebase:firebase-database-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
     implementation ("com.google.firebase:firebase-messaging-ktx")
+
+    // Import Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //implementation("com.github.hannesa2:AndroidSlidingUpPanel:3.5.0")
     implementation("androidx.core:core-ktx:1.9.0")
