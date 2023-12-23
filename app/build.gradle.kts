@@ -52,7 +52,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics-ktx")
     implementation ("com.google.firebase:firebase-messaging-ktx")
 
-
+    //implementation("com.github.hannesa2:AndroidSlidingUpPanel:3.5.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
